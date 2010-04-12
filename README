@@ -1,1 +1,26 @@
-hurp durp
+MOTIVATION:
+
+Serializing data is a common problem. It crosses language boundaries, and tends to be done by defining a C-struct-like binary format. Most languages have means of parsing these: Pythons struct library, the functions in Perl, Erlangs awesome bit syntax...
+
+However, what if the format you want to parse is:
+-bit-packed
+-not aligned on byte/word boundaries
+-future structure depends on past values
+-is not fully understood, so the definition may be wrong/incomplete
+
+Sounds like a pain in the ass. Or does it? Good tools can make hard problems easy.
+
+
+GOALS:
+
+Write a binary format unpacker that:
+-elegantly describes bit-packed structures (Erlang is a big inspiration here)
+-keeps that elegance when faced with polymorphic structures
+-can define sanity checks for all values, to catch incorrectly parsed data
+-can tighten the sanity checks for certain data sets, to speed up debugging
+-optimizes for fast development and debugging, but also runtime
+
+The end result should be a highly usable Haskell library.
+
+
+DESIGN IN PROGRESS - CODE QUALITY NOT GUARANTEED
