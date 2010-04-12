@@ -1,26 +1,28 @@
 MOTIVATION:
 
-Serializing data is a common problem. It crosses language boundaries, and tends to be done by defining a C-struct-like binary format. Most languages have means of parsing these: Pythons struct library, the functions in Perl, Erlangs awesome bit syntax...
+Data is often serialized by packing it into an array of bytes with no field names or identifiers. Most languages have means to do this: typecasting structures in C, the struct module in Python, similar functions in Perl, the bit syntax in Erlang, etc. The result can be saved to disk, or a database, or sent over a network.
 
-However, what if the format you want to parse is:
--bit-packed
--not aligned on byte/word boundaries
+Parsing such data, when the specifications have been lost or aren't available, is a bitch.
+
+Especially if:
+-data is not aligned on byte/word boundaries
+-data is bit-packed, many fields are <8 bits in width
 -future structure depends on past values
--is not fully understood, so the definition may be wrong/incomplete
+-your format definition may not be complete
 
-Sounds like a pain in the ass. Or does it? Good tools can make hard problems easy.
-
+This worst case scenario can come up reasonably often when dealing with legacy systems, or systems you're trying to reverse engineer. Dealing with it is a pain, but good tools make hard problems easy.
 
 GOALS:
 
-Write a binary format unpacker that:
+The goal is to write a tool that:
 -elegantly describes bit-packed structures (Erlang is a big inspiration here)
--keeps that elegance when faced with polymorphic structures
--can define sanity checks for all values, to catch incorrectly parsed data
--can tighten the sanity checks for certain data sets, to speed up debugging
--optimizes for fast development and debugging, but also runtime
+-keeps that elegance when faced with polymorphic, looping, and recursive structures
+-can define sanity checks for all fields, to catch incorrectly parsed data
+-can tighten the sanity checks for certain data sets, for fast debugging
+-optimizes for fast development and debugging, but also runs very quickly
 
 The end result should be a highly usable Haskell library.
 
+CURRENT STAGE: Pre-Alpha
 
-DESIGN IN PROGRESS - CODE QUALITY NOT GUARANTEED
+Concept proven, need to get the guts to work.
